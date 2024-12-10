@@ -39,7 +39,7 @@ export default function ToDoList(){
                         sx={{
                             height:'100%',
                         }}
-                        onClick={handleTasks}
+                        onClick={handleAdd}
                      > 
                         Add Task
                         </Button>
