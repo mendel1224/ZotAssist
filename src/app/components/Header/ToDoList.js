@@ -1,28 +1,57 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
+'use client';
+import React from 'react';
+import { Box, TextField, Button, Grid2 } from '@mui/material';
+import {useState} from 'react';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles('dark', {
-    backgroundColor: '#1A2027',
-  }),
-}));
+export default function ToDoList(){
+    const [tasks, setTasks] = useState([]);
+    const [task, setTask] = useState('');
 
-export default function BasicStack() {
-  return (
-    <Box sx={{ width: '100%' }}>
-      <Stack spacing={2}>
-        <Item>Item 1</Item>
-        <Item>Item 2</Item>
-        <Item>Item 3</Item>
-      </Stack>
-    </Box>
-  );
+    const handleAdd = () => {
+        setTasks(prev=> [...prev, task]);
+        setTask('');
+    };
+
+    return (
+        <Box>
+            <Grid2
+                container
+                spacing = {2}>
+                <Grid2
+                    item
+                    xs={6}>
+                    <TextField
+                        id='outlined-basic'
+                        label='Outlined'
+                        variant='outlined'
+                        value={task}
+                        fullWidth
+                        onChange={(e) => setTask(e.target.value)}
+                    />
+                    </Grid2>
+                        <Grid2 
+                        item xs={6}
+                        fullWidth
+                        >
+                    <Button 
+                        variant ='contained'
+                        fullWidth
+                        sx={{
+                            height:'100%',
+                        }}
+                        onClick={handleTasks}
+                     > 
+                        Add Task
+                        </Button>
+                    </Grid2>
+                    <Grid2 item xs={12}>
+                        <ul>
+                            {tasks.map((task, index) => (
+                                <li key ={index}>{todo}</li>
+                            ))}
+                        </ul>
+                    </Grid2>
+                </Grid2>
+        </Box>
+    )
 }
