@@ -1,36 +1,52 @@
 import React from 'react';
-import { Avatar, Box, Typography } from '@mui/material';
+import { Avatar, Box, Typography, Card, CardContent } from '@mui/material';
+import DashBoard from './DashBoard';
+
+
 
 const Header = () => {
     return (
 
-    <Box 
+<Box 
     sx = 
     {{
         display: 'flex',
-        alignItems: 'center',
-        gap: 5
+        flexDirection: 'column', // Stack items vertically
+        alignItems: 'flex-start',
+        gap: 2,
+        paddingLeft: 2,
+        //marginTop: 0, // Vertical margin
 
     }} 
     >
-    <Avatar alt = "profile icon"  />
-
-   <Box 
+   
+<Box 
    sx = {{ 
     display: 'flex',
     alignItems: 'flex-start',
     flexDirection: 'column',
-    marginTop: 2, // Vertical margin
-   }}>
+    marginTop: 2 , // Vertical margin
+   }}
+   >
+    <Avatar alt = "profile icon"  />
 
-
-    <Typography variant = "h4" align = "left" color = "black">
+    <Typography variant = "h4" align = "left" color = "black" marginTop={2}>
         Welcome, UCI Student!
     </Typography>       
-    <Typography variant  = "subtitile1" align = "left" color = "black">
+    <Typography variant  = "subtitle1" align = "left" color = "black">
         Stay organized and on track!
     </Typography>
     </Box>
+  
+ <Box 
+ sx = 
+   {{
+    display: 'flex',
+    alignItems: 'flex-start',
+   }}
+   >
+   <DashBoard />
+   </Box>
 </Box>
 );
 }
