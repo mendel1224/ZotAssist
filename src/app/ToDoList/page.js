@@ -12,6 +12,10 @@ export default function ToDoList(){
         setTask('');
     };
 
+    const handleDelete = (index) => {
+        setTasks((prev) => prev.filter((_, i) => i !== index));
+    };
+
     return (
         <Box>
             <Grid2 container spacing = {2}>
@@ -47,7 +51,12 @@ export default function ToDoList(){
                     <Grid2 size={12}>
                         <ul>
                             {tasks.map((task, index) => (
-                                <li key ={index}>{task}</li>
+                                <li key={'tasks${index}'}>
+                                {task}
+                                <Button
+                                onClick={() => handleDelete(index)}
+                                >DELETE</Button>
+                                </li>
                             ))}
                         </ul>
                     </Grid2>
