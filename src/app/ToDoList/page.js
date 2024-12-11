@@ -6,6 +6,7 @@ import {useState} from 'react';
 export default function ToDoList(){
     const [tasks, setTasks] = useState([]);
     const [task, setTask] = useState('');
+    const [editIndex, setEditIndex] = useState(null);
 
     const handleAdd = () => {
         setTasks(prev=> [...prev, task]);
@@ -14,6 +15,11 @@ export default function ToDoList(){
 
     const handleDelete = (index) => {
         setTasks((prev) => prev.filter((_, i) => i !== index));
+    };
+
+    const handleEdit = (index) => {
+        setTask(tasks[index]);
+        setEditIndex(index);
     };
 
     return (
@@ -53,6 +59,10 @@ export default function ToDoList(){
                             {tasks.map((task, index) => (
                                 <li key={'tasks${index}'}>
                                 {task}
+                                <Button
+                                onClick={() => handleEdit(index)}
+                                >EDIT
+                                </Button>
                                 <Button
                                 onClick={() => handleDelete(index)}
                                 >DELETE</Button>
