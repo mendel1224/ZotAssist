@@ -20,7 +20,7 @@ const DashBoard = () => {
         { title: "To-Do List" , icon:  <AssignmentIcon />  , route: '/ToDoList'} ,
         { title: "Calender", icon: <CalendarMonthIcon /> },
         { title: "Campus Map", icon: <MapIcon/>  } ,
-        { title: "Weather", icon: <WbSunnyIcon/> } ,
+        { title: "Weather", icon: <WbSunnyIcon/>, route: '/Weather' }, ,
         { title: "Time", icon: <AccessTimeIcon/> }
 
 ]
