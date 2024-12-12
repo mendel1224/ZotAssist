@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './components/Header/Header.js'
+import StudentTips from './StudentTips.js';
 import { Box } from '@mui/material';  
 
 export default function Home() {
@@ -16,6 +17,8 @@ export default function Home() {
 
       <Header>
       </Header>
+      <StudentTips> 
+      </StudentTips>
     </Box>
     
   );
