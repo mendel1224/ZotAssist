@@ -1,25 +1,50 @@
 'use client';
 import React from 'react';
-import { Box, TextField, Button, Grid2 } from '@mui/material';
+import { Box, TextField, Button, Grid2, List, ListItem} from '@mui/material';
 import {useState} from 'react';
 
 export default function ToDoList(){
     const [tasks, setTasks] = useState([]);
     const [task, setTask] = useState('');
-    const [editIndex, setEditIndex] = useState(null);
+    const [isEdited, setIsEdited] = useState(false);
+    const [editedId, setEditedId] = useState(null);
 
-    const handleAdd = () => {
-        setTasks(prev=> [...prev, task]);
-        setTask('');
+    const inputChange = (e) => {
+        setTask(e.target.value);
     };
 
-    const handleDelete = (index) => {
-        setTasks((prev) => prev.filter((_, i) => i !== index));
+    const handleAction = () => {
+        if(!isEdited){
+            setTasks([...tasks, {val: task, done: false, id: new Date().getTime() }]);
+        }
+        else{
+            setTasks([...tasks, {val: task, done: false, id: editedId}]);
+        }
+        setTask("");
+        setIsEdited(false);
     };
 
-    const handleEdit = (index) => {
-        setTask(tasks[index]);
-        setEditIndex(index);
+    const handleDelete = (id) => {
+        setTasks((prev) => prev.filter((task) => task.id !== id));
+    };
+
+    const handleDone = (id) => {
+        const updated = tasks.map((task) => {
+            if (task.id === id) {
+              task.done = !task.done;
+            }
+            return task;
+          });
+          setTasks(updated);
+    }
+
+    const handleEdit = (id) => {
+        const newTasks = tasks.filter((task) => task.id !== id);
+        const editTask = tasks.find((task) => task.id === id);
+        setEditedId(editTask.id);
+        setTask(editTask.val);
+        setTasks(newTasks);
+        setIsEdited(true);
     };
 
     return (
@@ -47,28 +72,31 @@ export default function ToDoList(){
                             sx={{
                                 height:'100%', width: '100%'
                             }}
-                            onClick={handleAdd}
+                            onClick={handleAction}
+                            disabled={task ? false : true}
                         > 
-                            Add Task
+                            {isEdited ? "Edit" : "Add Task"}
                         </Button>
 
                     </Grid2>
 
                     <Grid2 size={12}>
-                        <ul>
-                            {tasks.map((task, index) => (
-                                <li key={'tasks${index}'}>
-                                {task}
-                                <Button
-                                onClick={() => handleEdit(index)}
-                                >EDIT
-                                </Button>
-                                <Button
-                                onClick={() => handleDelete(index)}
-                                >DELETE</Button>
-                                </li>
-                            ))}
-                        </ul>
+                        <List>
+                            {tasks.map((task) => {
+                                return(
+                                    <ListItem key={task.id} style={{fontFamily: 'arial', fontSize: 24}}>
+                                        {task.val}
+                                        <Button
+                                        onClick={() => handleEdit(task.id)}
+                                        >EDIT
+                                        </Button>
+                                        <Button
+                                        onClick={() => handleDelete(task.id)}
+                                        >DELETE</Button>
+                                    </ListItem>
+                                );
+                            })}
+                        </List>
                     </Grid2>
 
                 </Grid2>
