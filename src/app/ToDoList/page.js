@@ -1,10 +1,17 @@
 'use client';
 import React from 'react';
-import { Box, TextField, Button, Grid2, List, ListItem} from '@mui/material';
+import { Box, TextField, Button, Grid2, List, ListItem, Checkbox} from '@mui/material';
 import {useState} from 'react';
+import { useEffect } from 'react';
 
 export default function ToDoList(){
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState(() => {
+
+        const saved = localStorage.getItem("todolist") || "[]";
+        const initialValue = JSON.parse(saved)
+        return initialValue || "";
+
+    });
     const [task, setTask] = useState('');
     const [isEdited, setIsEdited] = useState(false);
     const [editedId, setEditedId] = useState(null);
@@ -13,9 +20,13 @@ export default function ToDoList(){
         setTask(e.target.value);
     };
 
+    useEffect(() =>{
+        localStorage.setItem("todolist", JSON.stringify(tasks));
+        }, [tasks]);
+
     const handleAction = () => {
         if(!isEdited){
-            setTasks([...tasks, {val: task, done: false, id: new Date().getTime() }]);
+            setTasks([...tasks, {val: task, done: false, id: new Date().getTime()} ]);
         }
         else{
             setTasks([...tasks, {val: task, done: false, id: editedId}]);
@@ -85,6 +96,10 @@ export default function ToDoList(){
                             {tasks.map((task) => {
                                 return(
                                     <ListItem key={task.id} style={{fontFamily: 'arial', fontSize: 24}}>
+                                        <Checkbox>
+                                            onClick{() => handleDone(task.id)}
+                                            checked={task.done}
+                                        </Checkbox>
                                         {task.val}
                                         <Button
                                         onClick={() => handleEdit(task.id)}
