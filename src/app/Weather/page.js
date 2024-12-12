@@ -33,7 +33,7 @@ const Weather = () => {
   }, []);
 
   const celsiusToFahrenheit = (celsius) => (celsius * 9) / 5 + 32;
-  const kmhToMph = (kmh) => kmh * 0.621371;
+  const kmhToMph = (kmh) => kmh * 0.621371; // convert from km/h to mph
 
   const getWeatherIcon = (weatherCode) => {
     switch (weatherCode) {

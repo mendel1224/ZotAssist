@@ -1,3 +1,4 @@
+
 "use client"; 
 
 import React from "react";
@@ -33,7 +34,7 @@ const CampusMap = () => {
           border: "1px solid #ccc", // border styling
         }}
       >
-        <iframe
+        <iframe // renders interactive map of UC Irvine
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13104.09130776974!2d-117.844296!3d33.641204!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcdbadbe8e6533%3A0x9ae58e59bbcd6317!2sUniversity%20of%20California%2C%20Irvine!5e0!3m2!1sen!2sus!4v1700721526525!5m2!1sen!2sus"
           width="100%"
           height="100%"

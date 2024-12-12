@@ -1,4 +1,4 @@
-"use client"; // Add this line to mark the component as a client component
+"use client"; 
 import React from "react";
 import {
   Avatar,
